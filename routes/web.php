@@ -28,6 +28,7 @@ Route::middleware(['auth', 'can:is-staff'])->group(function () {
 Route::get('/joueurs', [JoueurController::class, 'index'])->name('joueurs.index');
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
