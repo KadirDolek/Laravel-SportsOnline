@@ -10,7 +10,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/equipes', [EquipeController::class, 'index'])->name('equipes.index');
 Route::get('/equipes/{equipe}', [EquipeController::class, 'show'])->name('equipes.show');
 Route::get('/joueurs', [JoueurController::class, 'index'])->name('joueurs.index');
-Route::get('/joueurs/{joueur}', [JoueurController::class, 'show'])->name('joueurs.show');
+
 
 // Routes protégées
 Route::middleware(['auth', 'can:is-staff'])->group(function () {
@@ -25,6 +25,7 @@ Route::middleware(['auth', 'can:is-staff'])->group(function () {
     Route::get('/equipes/create', [EquipeController::class, 'create'])->name('equipes.create');
     Route::post('/equipes', [EquipeController::class, 'store'])->name('equipes.store');
 });
+Route::get('/joueurs/{joueur}', [JoueurController::class, 'show'])->name('joueurs.show');
 
 // Routes de profil (si vous les voulez)
 Route::middleware('auth')->group(function () {
