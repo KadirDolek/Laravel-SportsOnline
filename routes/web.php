@@ -19,6 +19,7 @@ Route::middleware(['auth', 'can:is-staff'])->group(function () {
     Route::post('/joueurs', [JoueurController::class, 'store'])->name('joueurs.store');
     Route::get('/joueurs/{joueur}/edit', [JoueurController::class, 'edit'])->name('joueurs.edit'); 
     Route::put('/joueurs/{joueur}', [JoueurController::class, 'update'])->name('joueurs.update'); 
+    Route::delete('joueurs/{joueur}', [JoueurController::class, 'destroy'])->name('joueurs.destroy');
     
     // Routes équipes
     Route::get('/equipes/create', [EquipeController::class, 'create'])->name('equipes.create');

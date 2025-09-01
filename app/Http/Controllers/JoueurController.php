@@ -210,5 +210,11 @@ class JoueurController extends Controller
         
     return redirect()->route('joueurs.show', $joueur)->with('success', $message);
     }
+
+    public function destroy($joueur){
+        $joueurs = Joueur::findOrFail($joueur);
+        $joueurs->delete();
+        return redirect()->route('joueurs.index');
+    }
     
 }

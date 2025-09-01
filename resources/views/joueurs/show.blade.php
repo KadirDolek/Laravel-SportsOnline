@@ -59,7 +59,7 @@
                         <a href="{{ route('joueurs.edit', $joueur) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                             Modifier
                         </a>
-                        <form action="#" method="POST" class="inline-block">
+                        <form action="{{ route('joueurs.destroy', $joueur) }}"  method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce joueur?')">
