@@ -119,4 +119,5 @@ class JoueurController extends Controller
             
         return redirect()->route('joueurs.index')->with('success', $message);
     }
+    
 }

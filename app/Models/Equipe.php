@@ -61,4 +61,5 @@ class Equipe extends Model
         
         return true;
     }
+
 }
