@@ -56,7 +56,7 @@
                     <!-- Boutons d'action -->
                     @can('is-staff')
                     <div class="mt-8 border-t pt-4">
-                        <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                        <a href="{{ route('joueurs.edit', $joueur) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
                             Modifier
                         </a>
                         <form action="#" method="POST" class="inline-block">
