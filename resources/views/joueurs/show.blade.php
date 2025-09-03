@@ -62,7 +62,7 @@
                         <form action="{{ route('joueurs.destroy', $joueur) }}"  method="POST" class="inline-block">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce joueur?')">
+                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" >
                                 Supprimer
                             </button>
                         </form>

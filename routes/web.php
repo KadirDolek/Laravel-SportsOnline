@@ -14,7 +14,7 @@ Route::get('/joueurs', [JoueurController::class, 'index'])->name('joueurs.index'
 
 // Routes protégées
 Route::middleware(['auth', 'can:is-staff'])->group(function () {
-    // Routes joueurs
+// Routes joueurs
     Route::get('/joueurs/create', [JoueurController::class, 'create'])->name('joueurs.create');
     Route::post('/joueurs', [JoueurController::class, 'store'])->name('joueurs.store');
     Route::get('/joueurs/{joueur}/edit', [JoueurController::class, 'edit'])->name('joueurs.edit'); 
@@ -24,10 +24,11 @@ Route::middleware(['auth', 'can:is-staff'])->group(function () {
     // Routes équipes
     Route::get('/equipes/create', [EquipeController::class, 'create'])->name('equipes.create');
     Route::post('/equipes', [EquipeController::class, 'store'])->name('equipes.store');
-});
-Route::get('/joueurs/{joueur}', [JoueurController::class, 'show'])->name('joueurs.show');
+    
 
-// Routes de profil (si vous les voulez)
+});
+    Route::get('/joueurs/{joueur}', [JoueurController::class, 'show'])->name('joueurs.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
