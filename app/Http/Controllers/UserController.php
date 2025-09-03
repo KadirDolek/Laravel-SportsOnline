@@ -37,4 +37,18 @@ class UserController extends Controller
 
         return redirect()->route('admin.users.index')->with('success', 'Rôle utilisateur mis à jour avec succès');
     }
+
+    public function destroy(User $user)
+{
+    $this->authorize('is-admin'); // Seul l'admin peut supprimer
+    
+    // Empêcher l'admin de se supprimer lui-même
+    if ($user->id === auth()->id()) {
+        return redirect()->back()->with('error', 'Vous ne pouvez pas supprimer votre propre compte.');
+    }
+    
+    $user->delete();
+    
+    return redirect()->route('admin.users.index')->with('success', 'Utilisateur supprimé avec succès');
+}
 }

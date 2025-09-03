@@ -99,9 +99,15 @@ public function destroy(Equipe $equipe)
 {
     $this->authorize('manage-equipe', $equipe);
     
-    // Vérifier si l'équipe a des joueurs
-    if ($equipe->joueurs()->count() > 0) {
-        return redirect()->back()->with('error', 'Impossible de supprimer une équipe qui contient des joueurs');
+    // Vérifier si l'utilisateur est admin - il peut supprimer même avec des joueurs
+    if (auth()->user()->role !== 'admin') {
+        // Pour les coaches, vérifier si l'équipe a des joueurs
+        if ($equipe->joueurs()->count() > 0) {
+            return redirect()->back()->with('error', 'Impossible de supprimer une équipe qui contient des joueurs');
+        }
+    } else {
+        // Si admin, supprimer aussi les joueurs associés
+        $equipe->joueurs()->delete();
     }
     
     $equipe->delete();

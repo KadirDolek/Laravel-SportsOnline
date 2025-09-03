@@ -43,6 +43,7 @@ Route::middleware(['auth', 'can:is-admin'])->prefix('admin')->name('admin.')->gr
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
     Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy'); 
 });
 
 // Routes d'authentification Breeze

@@ -57,7 +57,7 @@
                                     @can('manage-equipe', $equipe)
                                         <a href="{{ route('equipes.edit', $equipe) }}" class="text-green-600 hover:text-green-800">Modifier</a>
                                         
-                                        @if($equipe->joueurs->count() === 0)
+                                        @if(auth()->user()->role === 'admin' || $equipe->joueurs->count() === 0)
                                             <form action="{{ route('equipes.destroy', $equipe) }}" method="POST" class="inline-block">
                                                 @csrf
                                                 @method('DELETE')
