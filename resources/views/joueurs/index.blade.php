@@ -29,8 +29,8 @@
                 </div>
             </div>
 
-            <!-- Bouton Ajouter (seulement pour staff) -->
-            @can('is-staff')
+            <!-- Bouton Ajouter (pour tous les utilisateurs connectés) -->
+            @can('create-joueur')
             <div class="mb-6">
                 <a href="{{ route('joueurs.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Ajouter un joueur
@@ -49,6 +49,7 @@
                                     <div>
                                         <h3 class="text-xl font-semibold">{{ $joueur->prenom }} {{ $joueur->nom }}</h3>
                                         <p class="text-gray-600">{{ $joueur->age }} ans</p>
+                                        <p class="text-xs text-gray-500">Créé par: {{ $joueur->user->name }}</p>
                                     </div>
                                 </div>
                                 
@@ -67,8 +68,19 @@
                                     <span class="inline-block bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded-full mt-2">RÉSERVE</span>
                                 @endif
                                 
-                                <div class="mt-4">
+                                <div class="mt-4 space-x-2">
                                     <a href="{{ route('joueurs.show', $joueur) }}" class="text-blue-600 hover:text-blue-800">Voir profil</a>
+                                    
+                                    @can('manage-joueur', $joueur)
+                                        <a href="{{ route('joueurs.edit', $joueur) }}" class="text-green-600 hover:text-green-800">Modifier</a>
+                                        <form action="{{ route('joueurs.destroy', $joueur) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce joueur?')">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    @endcan
                                 </div>
                             </div>
                         @endforeach

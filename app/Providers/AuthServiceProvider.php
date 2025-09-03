@@ -37,4 +37,19 @@ class AuthServiceProvider extends ServiceProvider
         
         return false;
     });
+     Gate::define('manage-joueur', function ($user, $joueur) {
+        if ($user->role === 'admin') {
+            return true; 
+        }
+        
+        // Coach et utilisateur normal ne peuvent gérer que leurs propres joueurs
+        return $user->id === $joueur->user_id;
+    });
+    
+    // Gate pour créer des joueurs (autoriser staff et users normaux)
+    Gate::define('create-joueur', function ($user) {
+        return true; // Tous les utilisateurs connectés peuvent créer des joueurs
+
+        
+    });
 }}
