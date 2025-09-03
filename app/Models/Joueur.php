@@ -40,18 +40,29 @@ class Joueur extends Model
         return $this->belongsTo(User::class);
     }
     
-    public function getPhotoUrlAttribute()
-    {
-        if ($this->photo) {
-            return asset('storage/' . $this->photo->src);
-        }
-        
-        $defaultImages = [
-            1 => 'default_male.jpg',
-            2 => 'default_female.jpg',
-            3 => 'default_mixed.jpg'
-        ];
-        
-        return asset('images/' . ($defaultImages[$this->genre_id] ?? 'default.jpg'));
+public function getPhotoUrlAttribute()
+{
+    // Si une photo upload existe, on l'utilise
+    if ($this->photo) {
+        return asset('storage/' . $this->photo->src);
     }
+
+    // 1=Homme, 2=Femme, 3=Mixte (comme dans tes seeders)
+    $byGenre = [
+        1 => ['img/male1.jpg', 'img/male2.jpg', 'img/male3.jpg'],
+        2 => ['img/femme1.jpg', 'img/femme2.jpg', 'img/femme3.jpg'],
+        3 => ['img/mixt1.jpg', 'img/mixt2.jpg', 'img/mixt3.jpg'],
+    ];
+
+    $candidates = $byGenre[$this->genre_id] ?? ['img/mixt1.jpg'];
+
+    // Choix déterministe pour que chaque joueur garde la même image
+    $index = 0;
+    if (!empty($candidates)) {
+        $index = max(0, (($this->id ?? 0) % count($candidates)));
+    }
+
+    return asset($candidates[$index]);
+}
+
 }
