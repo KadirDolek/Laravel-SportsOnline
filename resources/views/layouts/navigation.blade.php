@@ -41,10 +41,17 @@
                             </button>
                         </x-slot>
 
-                        <x-slot name="content">
+                         <x-slot name="content">
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
+                            
+                            <!-- Lien administration pour les admins -->
+                            @can('is-admin')
+                            <x-dropdown-link :href="route('admin.users.index')">
+                                {{ __('Administration') }}
+                            </x-dropdown-link>
+                            @endcan
 
                             <!-- Authentication -->
                             <form method="POST" action="{{ route('logout') }}">

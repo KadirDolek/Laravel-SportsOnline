@@ -9,6 +9,7 @@ class AuthServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->registerPolicies();
         // Gate pour vérifier si l'utilisateur est admin
         Gate::define('is-admin', function ($user) {
             return $user->role === 'admin';
