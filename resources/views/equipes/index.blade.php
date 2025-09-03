@@ -55,18 +55,21 @@
                                     <a href="{{ route('equipes.show', $equipe) }}" class="text-blue-600 hover:text-blue-800">Voir détails</a>
                                     
                                     @can('manage-equipe', $equipe)
-                                        <a href="{{ route('equipes.edit', $equipe) }}" class="text-green-600 hover:text-green-800">Modifier</a>
-                                        
-                                        @if(auth()->user()->role === 'admin' || $equipe->joueurs->count() === 0)
-                                            <form action="{{ route('equipes.destroy', $equipe) }}" method="POST" class="inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe?')">
-                                                    Supprimer
-                                                </button>
-                                            </form>
-                                        @endif
-                                    @endcan
+    <a href="{{ route('equipes.edit', $equipe) }}" class="text-green-600 hover:text-green-800">Modifier</a>
+    
+    <!-- Correction du bouton supprimer -->
+                                    @if(auth()->user()->role === 'admin' || 
+                                        (auth()->user()->role === 'coach' && 
+                                        $equipe->user_id === auth()->id()))
+                                        <form action="{{ route('equipes.destroy', $equipe) }}" method="POST" class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe?')">
+                                                Supprimer
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endcan
                                 </div>
                             </div>
                         @endforeach
