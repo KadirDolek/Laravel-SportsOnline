@@ -24,9 +24,11 @@ Route::middleware(['auth', 'can:is-staff'])->group(function () {
     Route::delete('joueurs/{joueur}', [JoueurController::class, 'destroy'])->name('joueurs.destroy');
     
     // Routes équipes
-    Route::get('/equipes/create', [EquipeController::class, 'create'])->name('equipes.create');
+     Route::get('/equipes/create', [EquipeController::class, 'create'])->name('equipes.create');
     Route::post('/equipes', [EquipeController::class, 'store'])->name('equipes.store');
-    
+    Route::get('/equipes/{equipe}/edit', [EquipeController::class, 'edit'])->name('equipes.edit');
+    Route::put('/equipes/{equipe}', [EquipeController::class, 'update'])->name('equipes.update');
+    Route::delete('/equipes/{equipe}', [EquipeController::class, 'destroy'])->name('equipes.destroy'); //
 
 });
     Route::get('/joueurs/{joueur}', [JoueurController::class, 'show'])->name('joueurs.show');

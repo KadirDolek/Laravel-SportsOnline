@@ -26,12 +26,15 @@ class AuthServiceProvider extends ServiceProvider
         });
         
         // Gate pour vérifier si l'utilisateur peut modifier une équipe
-        Gate::define('manage-equipe', function ($user, $equipe) {
-            if ($user->role === 'admin') {
-                return true;
-            }
-            
-            return $user->role === 'coach' && $user->id === $equipe->user_id;
-        });
-    }
-}
+    Gate::define('manage-equipe', function ($user, $equipe) {
+        if ($user->role === 'admin') {
+            return true; // L'admin peut tout gérer
+        }
+        
+        if ($user->role === 'coach') {
+            return $user->id === $equipe->user_id; // Le coach ne peut gérer que ses équipes
+        }
+        
+        return false;
+    });
+}}

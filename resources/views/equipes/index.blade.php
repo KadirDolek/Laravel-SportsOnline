@@ -48,10 +48,25 @@
                                 <p class="text-gray-600">{{ $equipe->ville }}, {{ $equipe->pays }}</p>
                                 <p class="text-sm text-gray-500">Continent: {{ $equipe->continent->nom }}</p>
                                 <p class="text-sm text-gray-500">Genre: {{ $equipe->genre->genre }}</p>
+                                <p class="text-sm text-gray-500">Entraîneur: {{ $equipe->user->name }}</p>
                                 <p class="text-sm text-gray-500">{{ $equipe->joueurs->count() }} joueurs</p>
                                 
-                                <div class="mt-4">
+                                <div class="mt-4 space-x-2">
                                     <a href="{{ route('equipes.show', $equipe) }}" class="text-blue-600 hover:text-blue-800">Voir détails</a>
+                                    
+                                    @can('manage-equipe', $equipe)
+                                        <a href="{{ route('equipes.edit', $equipe) }}" class="text-green-600 hover:text-green-800">Modifier</a>
+                                        
+                                        @if($equipe->joueurs->count() === 0)
+                                            <form action="{{ route('equipes.destroy', $equipe) }}" method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe?')">
+                                                    Supprimer
+                                                </button>
+                                            </form>
+                                        @endif
+                                    @endcan
                                 </div>
                             </div>
                         @endforeach

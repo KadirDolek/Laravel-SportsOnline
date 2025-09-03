@@ -88,6 +88,25 @@
                         </div>
                     </div>
                 </div>
+                <div class="mt-8 border-t pt-4 mb-4 ms-4">
+                    @can('manage-equipe', $equipe)
+                        <a href="{{ route('equipes.edit', $equipe) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
+                            Modifier l'équipe
+                        </a>
+                        
+                        @if($equipe->joueurs->count() === 0)
+                            <form action="{{ route('equipes.destroy', $equipe) }}" method="POST" class="inline-block">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette équipe?')">
+                                    Supprimer l'équipe
+                                </button>
+                            </form>
+                        @else
+                            <span class="text-gray-500 text-sm ml-4">Impossible de supprimer : l'équipe contient des joueurs</span>
+                        @endif
+                    @endcan
+                </div>
             </div>
         </div>
     </div>
