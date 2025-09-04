@@ -56,7 +56,7 @@
         </div>
 
         <div class="mt-10 border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-white/60">
-            <p>&copy; {{ date('Y') }} Plateforme Football. Tous droits réservés.</p>
+            <p>&copy; {{ date('Y') }} Plateforme Football. Tous droits réservés. Projet réalisé par Kadir Dolek & Ali Jaber</p>
             <div class="flex items-center gap-4">
                 <a href="#" class="hover:text-white">Mentions légales</a>
                 <a href="#" class="hover:text-white">Confidentialité</a>
