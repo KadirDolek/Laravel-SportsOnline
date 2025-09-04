@@ -34,7 +34,7 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port
-EXPOSE 8080
+EXPOSE $PORT
 
 # Start services
-CMD php-fpm -D && nginx -g "daemon off;"
+CMD sed -i "s/8080/$PORT/g" /etc/nginx/nginx.conf && php-fpm -D && nginx -g "daemon off;"
