@@ -84,7 +84,7 @@
                             <!-- Profil -->
                             <x-dropdown-link
                                 :href="route('profile.edit')"
-                                class="group flex items-center gap-2 px-3 py-2 rounded-lg text-gray-100
+                                class="group flex items-center gap-2 px-3 py-2 rounded-lg text-white
                                        hover:bg-white/10 transition"
                             >
                                 <svg class="w-4 h-4 opacity-80 group-hover:opacity-100" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@
                             @can('is-admin')
                                 <x-dropdown-link
                                     :href="route('admin.users.index')"
-                                    class="group flex items-center gap-2 px-3 py-2 rounded-lg text-amber-200
+                                    class="group flex items-center gap-2 px-3 py-2 rounded-lg text-white
                                            hover:bg-amber-400/10 hover:text-amber-100 transition"
                                 >
                                     <svg class="w-4 h-4 opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
