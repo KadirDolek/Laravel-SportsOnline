@@ -4,11 +4,7 @@
     "type": "module",
     "scripts": {
         "build": "vite build",
-        "dev": "vite",
-        "start": "npx serve dist -s"
-    },
-    "dependencies": {
-        "serve": "^14.2.0"
+        "dev": "vite"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
