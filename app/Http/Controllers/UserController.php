@@ -26,6 +26,9 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $this->authorize('is-admin');
+        if ($user->id === auth()->id() && $request->has('role')) {
+        return redirect()->back()->with('error', 'Vous ne pouvez pas modifier votre propre rôle.');
+    }
         
         $request->validate([
             'role' => 'required|in:admin,coach,utilisateur'
